@@ -1,13 +1,14 @@
-text = 'Raz dwa Trzy CzterY'
-words = text.split()
-result = ''
-i = 1
-for word in words:
-    print(i)
-    print(word)
-    if i == 1:
-        words[i-1] = word.lower()
-    else:
-        words[i-1] = word.title()
-    i += 1
-print(''.join(words))
+text = [["Glitch", "is", "a", "minor", "problem", "that", "causes", "a", "temporary", "setback"],
+        ["Ephemeral", "lasts", "one", "day", "only"],
+        ["Accolade", "is", "an", "expression", "of", "praise"]]
+my_list = []
+
+n = 1
+
+for el in text:
+    for l in el:
+        if len(l) <= n:
+            my_list.append(l)
+
+
+print(my_list)
