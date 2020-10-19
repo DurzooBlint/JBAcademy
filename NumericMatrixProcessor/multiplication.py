@@ -59,7 +59,7 @@ def matrix_multiplication_constant(l_a, constant):
     for i in l_a:
         l_row_result =[]
         for item in i:
-            l_row_result.append(int(item) * constant)
+            l_row_result.append(float(item) * constant)
         l_result.append(l_row_result)
 
     return l_result
