@@ -103,8 +103,25 @@ def print_menu():
     print('1. Add matrices')
     print('2. Multiply matrix by a constant')
     print('3. Multiply matrices')
+    print('4. Transpose matrix')
     print('0. Exit')
 
+
+def transpose(l_matrix, i_transpose_opt):
+
+    if i_transpose_opt == 1:
+        l_result = [[l_matrix[j][i] for j in range(len(l_matrix))] for i in range(len(l_matrix[0]))]
+
+    elif i_transpose_opt == 2:
+        l_result = [[l_matrix[-j][i] for j in range(len(l_matrix))] for i in range(len(l_matrix[0]))]
+
+    elif i_transpose_opt == 3:
+        pass
+
+    elif i_transpose_opt == 4:
+        pass
+
+    return l_result
 
 def main():
 
@@ -200,6 +217,34 @@ def main():
             l_result = multiply_matrices(l_matrix_a, i_rows_a, i_columns_a, l_matrix_b, i_rows_b, i_columns_b)
             print('The result is: ')
             print_matrix(l_result)
+
+        elif option == 4:
+            print('1. Main diagonal')
+            print('2. Side diagonal')
+            print('3. Vertical line')
+            print('4. Horizontal line')
+            i_transpose_opt = int(input('Your choice: '))
+
+            # read size of matrix
+            temp = input('Enter size of matrix: ')
+            i_rows = int(temp.split(' ')[0])
+            i_columns = int(temp.split(' ')[1])
+
+            # read matrix
+            temp = input('Enter matrix: ')
+            s_input_a = temp + '\n'
+            for item in range(i_rows - 1):
+                temp = input()
+                if item < (i_rows - 2):
+                    s_input_a += temp + '\n'
+                else:
+                    s_input_a += temp
+
+            l_matrix = read_matrix(i_rows, s_input_a)
+            l_result = transpose(l_matrix, i_transpose_opt)
+            print('The result is: ')
+            print_matrix(l_result)
+
 
         print_menu()
         option = int(input())
