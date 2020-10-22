@@ -110,10 +110,23 @@ def print_menu():
 def transpose(l_matrix, i_transpose_opt):
 
     if i_transpose_opt == 1:
+
         l_result = [[l_matrix[j][i] for j in range(len(l_matrix))] for i in range(len(l_matrix[0]))]
 
     elif i_transpose_opt == 2:
-        l_result = [[l_matrix[-j][i] for j in range(len(l_matrix))] for i in range(len(l_matrix[0]))]
+
+        l_result = [[l_matrix[len(l_matrix) - j - 1][len(l_matrix[j]) - i - 1] for j in range(len(l_matrix))] for i in range(len(l_matrix[0]))]
+
+        # l_result = []
+        # l_row = []
+        # j = 0
+        # i = 0
+        # while j <= len(l_matrix) - 1:
+        #     while i <= len(l_matrix[j]) - 1:
+        #         l_row.append(l_matrix[len(l_matrix) - j - 1][len(l_matrix[j]) - i - 1])
+        #         i += 1
+        #     l_result.append(l_row)
+        #     j += 1
 
     elif i_transpose_opt == 3:
         pass
